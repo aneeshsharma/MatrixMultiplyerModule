@@ -18,6 +18,10 @@ int matrix_2[5][5] =	{
 						};
 int main() {
 	FILE* device = fopen("/dev/matrix-multiplyer", "w");
+	if (!device) {
+		printf("No device file found!\nMake sure that you run - make install before make test\n");
+		return -1;
+	}
 	char c;
 	int output[SIZE][SIZE];
 	int output_size;
