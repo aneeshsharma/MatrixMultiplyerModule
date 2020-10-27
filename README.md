@@ -35,6 +35,11 @@ The matrix represented by this output will be -
 6 12 18
 ```
 
+## Prerequisites
+Before installing and testing this driver module, make sure you have the following packages installed -
+- `make` - the make utility
+- `gcc` - the GNU Compiler Collection
+
 ## Usage
 The project includes a `Makefile`. The operations on the `Makefile` are given below. You can use them to compile the module and install the module to your system. It also includes a test script that can be used to test the module-
 
@@ -50,3 +55,8 @@ This will also create a new device file at `/dev/matrix-multiplyer`.
 To test the module, run `make test`. This will compile the `test.c` file and run the test. You need to run `make install` before this to install the module.
 `test.c` tests the module against a 5x5 matrix and checks if the output matches with that of a regular matrix mutiplication function.
 
+### Remove - `make remove`
+To remove the module, run `make remove`. This will remove the module as well as delete the device file at `/dev/matrix-multiplyer`.
+
+### Check - `make check`
+To check for the module's install status, run `make check`. This will check if the module is installed or not.
