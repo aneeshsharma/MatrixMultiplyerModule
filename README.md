@@ -34,3 +34,19 @@ The matrix represented by this output will be -
 6 12 18
 6 12 18
 ```
+
+## Usage
+The project includes a `Makefile`. The operations on the `Makefile` are given below. You can use them to compile the module and install the module to your system. It also includes a test script that can be used to test the module-
+
+### Build - `make`
+To build the module, simply run `make`. This compiles the module using your current kernel.
+
+### Install - `make install`
+To install the module, run `make install`. This has a dependency to the target `all`. So, installing would automatically compile the module if not done already.
+This will also create a new device file at `/dev/matrix-multiplyer`.
+> Note: The driver uses the major number 240. So, make sure that is free or the install will fail
+
+### Test - `make test`
+To test the module, run `make test`. This will compile the `test.c` file and run the test. You need to run `make install` before this to install the module.
+`test.c` tests the module against a 5x5 matrix and checks if the output matches with that of a regular matrix mutiplication function.
+
