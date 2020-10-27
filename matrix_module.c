@@ -6,6 +6,11 @@
 // Use General Public License
 MODULE_LICENSE("GPL");
 
+// use a preset major number
+#ifndef MAJOR_NUMBER
+	#define MAJOR_NUMBER 240
+#endif
+
 // Name of the device to be registered
 const char* DEVICE_NAME = "matrix-multiplyer";
 
@@ -52,17 +57,17 @@ int matrix_module_init(void) {
 	printk(KERN_NOTICE "Initialising deivce - %s function\n", __FUNCTION__);
 	
 	// Resgiter a new character device
-	result = register_chrdev(0, 
+	result = register_chrdev(MAJOR_NUMBER, 
 							DEVICE_NAME, 
 							&matrix_fops);
 	// if result is -ve, an error has occured
-	if (result < 0) {
+	if (result != 0) {
 		printk(KERN_WARNING "Error registering device. Code = %d\n", result);
 		return result;
 	}
 
-	// if result is positive, it is the registered major device number
-	device_major_number = result;
+	// set major number
+	device_major_number = MAJOR_NUMBER;
 	printk(KERN_NOTICE "Registered device with major number - %d\n", device_major_number);
 	return 0;
 }
@@ -226,7 +231,7 @@ ssize_t matrix_module_write(struct file* filep, const char* user_buffer, size_t 
 		return -EFAULT;
 	}
 	*offset += len;
-	printk(KERN_NOTICE "Input length - %d\n", len);
+	printk(KERN_NOTICE "Input length - %ld\n", len);
 	// end with null character
 	write_buffer[*offset] = 0;
 	calculateOutput();
