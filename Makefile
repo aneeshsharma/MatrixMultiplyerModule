@@ -1,4 +1,4 @@
-MODULE_NAME = matrix_module
+MODULE_NAME = G19_code
 
 obj-m := $(MODULE_NAME).o
 
@@ -24,8 +24,8 @@ remove:
 check:
 	lsmod | grep $(MODULE_NAME)
 
-test.o: test.c
-	$(CC) test.c -o test.o
+G19_test.o: G19_test.c
+	$(CC) G19_test.c -o G19_test.o
 
-test: test.o
-	./test.o
+test: G19_test.o
+	./G19_test.o
